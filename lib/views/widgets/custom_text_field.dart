@@ -8,14 +8,17 @@ class CustomTextField extends StatelessWidget {
     this.inputType,
     this.onChanged,
     this.obscureText = false,
+    this.maxLines = 1,
   });
   Function(String)? onChanged;
+  final int? maxLines;
   String? hintText;
   TextInputType? inputType;
   bool? obscureText;
   @override
   Widget build(BuildContext context) {
     return TextField(
+      maxLines: maxLines,
       cursorColor: kPrimaryColor,
       obscureText: obscureText!,
       onChanged: onChanged,
