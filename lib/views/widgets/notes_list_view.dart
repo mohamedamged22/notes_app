@@ -19,15 +19,18 @@ class CustomNotesListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: 10,
-      padding: EdgeInsets.zero,
-      itemBuilder: (BuildContext context, int index) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4.0),
-          child: CustomNoteItem(backGroundColor: data[index]),
-        );
-      },
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      child: ListView.builder(
+        itemCount: 10,
+        padding: EdgeInsets.zero,
+        itemBuilder: (BuildContext context, int index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4.0),
+            child: CustomNoteItem(backGroundColor: data[index]),
+          );
+        },
+      ),
     );
   }
 }
