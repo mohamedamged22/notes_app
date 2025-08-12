@@ -8,12 +8,16 @@ import 'package:notes_app/views/notes_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
-  Bloc.observer = SimpleBlocObserver();
-  await Hive.initFlutter();
-  await Hive.openBox(kNotesBox);
-  Hive.registerAdapter(NoteModelAdapter());
+  WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(NotesApp());
+  Bloc.observer = SimpleBlocObserver();
+
+  await Hive.initFlutter();
+
+  Hive.registerAdapter(NoteModelAdapter()); 
+
+  await Hive.openBox<NoteModel>(kNotesBox); 
+  runApp(const NotesApp());
 }
 
 class NotesApp extends StatelessWidget {
@@ -26,11 +30,11 @@ class NotesApp extends StatelessWidget {
       child: MaterialApp(
         theme: ThemeData(
           brightness: Brightness.dark,
-          scaffoldBackgroundColor: Color(0xff2D2D2D),
+          scaffoldBackgroundColor: const Color(0xff2D2D2D),
           fontFamily: 'Poppins',
         ),
         debugShowCheckedModeBanner: false,
-        home: NotesView(),
+        home: const NotesView(),
       ),
     );
   }

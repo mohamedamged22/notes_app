@@ -19,14 +19,9 @@ class CustomModelSheet extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: SingleChildScrollView(
-            child: ModalProgressHUD(
-              inAsyncCall: state is AddNoteLoading ? true : false,
-              child: AddNoteForm(),
-            ),
-          ),
+        return ModalProgressHUD(
+          inAsyncCall: state is AddNoteLoading ? true : false,
+          child: SingleChildScrollView(child: AddNoteForm()),
         );
       },
     );
