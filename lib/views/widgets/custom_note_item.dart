@@ -5,10 +5,7 @@ import 'package:notes_app/model/note_model.dart';
 import 'package:notes_app/views/edit_notes_view.dart';
 
 class CustomNoteItem extends StatelessWidget {
-  const CustomNoteItem({
-    super.key,
-    required this.note,
-  });
+  const CustomNoteItem({super.key, required this.note});
   final NoteModel note;
 
   @override
@@ -50,7 +47,9 @@ class CustomNoteItem extends StatelessWidget {
                 ),
               ),
               trailing: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  note.delete();
+                },
                 icon: Icon(
                   FontAwesomeIcons.trash,
                   color: Colors.black,
