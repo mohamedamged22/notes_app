@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes_app/cubits/add_note_cubit/add_note_cubit.dart';
+import 'package:notes_app/model/note_model.dart';
+import 'package:notes_app/views/widgets/color_item.dart';
 
-class ColorsItemList extends StatefulWidget {
-  const ColorsItemList({super.key});
-
+class EditNotesColorsList extends StatefulWidget {
+  const EditNotesColorsList({super.key, required this.note});
+  final NoteModel note;
   @override
-  State<ColorsItemList> createState() => _ColorsItemListState();
+  State<EditNotesColorsList> createState() => _EditNotesColorsListState();
 }
 
-class _ColorsItemListState extends State<ColorsItemList> {
-  int currentIndex = 0;
+class _EditNotesColorsListState extends State<EditNotesColorsList> {
+  late int currentIndex;
+  @override
+  void initState() {
+    currentIndex = data.indexOf(Color(widget.note.color));
+    super.initState();
+  }
+
   final data = const [
     Color(0xFFFFCC80),
     Color(0xFFB2EBF2),
@@ -37,8 +43,7 @@ class _ColorsItemListState extends State<ColorsItemList> {
             child: GestureDetector(
               onTap: () {
                 currentIndex = index;
-                BlocProvider.of<AddNoteCubit>(context).color =
-                    data[currentIndex];
+                widget.note.color = data[index].value;
                 setState(() {});
               },
               child: ColorItem(
@@ -50,22 +55,5 @@ class _ColorsItemListState extends State<ColorsItemList> {
         },
       ),
     );
-  }
-}
-
-class ColorItem extends StatelessWidget {
-  const ColorItem({super.key, required this.data, required this.isChosen});
-  final Color data;
-  final bool isChosen;
-
-  @override
-  Widget build(BuildContext context) {
-    return isChosen
-        ? CircleAvatar(
-          backgroundColor: Colors.white,
-          radius: 28,
-          child: CircleAvatar(radius: 22, backgroundColor: data),
-        )
-        : CircleAvatar(radius: 28, backgroundColor: data);
   }
 }

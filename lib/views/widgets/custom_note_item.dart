@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:notes_app/cubits/notes_cubit/notes_cubit.dart';
 import 'package:notes_app/model/note_model.dart';
 import 'package:notes_app/views/edit_notes_view.dart';
+import 'package:notes_app/views/widgets/show_snak_bar.dart';
 
 class CustomNoteItem extends StatelessWidget {
   const CustomNoteItem({super.key, required this.note});
@@ -18,7 +19,7 @@ class CustomNoteItem extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return EditNotesView(note: note,);
+              return EditNotesView(note: note);
             },
           ),
         );
@@ -51,6 +52,7 @@ class CustomNoteItem extends StatelessWidget {
               trailing: IconButton(
                 onPressed: () {
                   note.delete();
+                  showSnackBar(context, 'Note Deleted Successful');
                   BlocProvider.of<NotesCubit>(context).fetchAllNotes();
                 },
                 icon: Icon(

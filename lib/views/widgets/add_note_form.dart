@@ -5,6 +5,7 @@ import 'package:notes_app/model/note_model.dart';
 import 'package:notes_app/views/widgets/color_item.dart';
 import 'package:notes_app/views/widgets/custom_button.dart';
 import 'package:notes_app/views/widgets/custom_text_field.dart';
+import 'package:notes_app/views/widgets/show_snak_bar.dart';
 
 class AddNoteForm extends StatefulWidget {
   const AddNoteForm({super.key});
@@ -40,7 +41,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
             },
           ),
           SizedBox(height: 16),
-           ColorsItemList( ),
+          ColorsItemList(),
           SizedBox(height: 32),
           BlocBuilder<AddNoteCubit, AddNoteState>(
             builder: (context, state) {
@@ -56,6 +57,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                       color: Colors.blueAccent.value,
                     );
                     BlocProvider.of<AddNoteCubit>(context).addNote(note);
+                    showSnackBar(context, 'Success to Add Note');
                   } else {
                     autovalidateMode = AutovalidateMode.always;
                     setState(() {});
