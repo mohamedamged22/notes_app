@@ -21,39 +21,41 @@ class _EditNotesViewBodyState extends State<EditNotesViewBody> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          SizedBox(height: 50),
-          CustomAppBar(
-            title: 'Edit Note',
-            icon: Icon(Icons.check),
-            onPressed: () {
-              widget.note.title = title ?? widget.note.title;
-              widget.note.subtitle = subtitle ?? widget.note.subtitle;
-              widget.note.save();
-              BlocProvider.of<NotesCubit>(context).fetchAllNotes();
-              showSnackBar(context, 'Edit Note Successful');
-              Navigator.pop(context);
-            },
-          ),
-          SizedBox(height: 50),
-          CustomTextFormField(
-            hintText: widget.note.title,
-            onChang: (p0) {
-              title = p0;
-            },
-          ),
-          SizedBox(height: 16),
-          CustomTextFormField(
-            hintText: widget.note.subtitle,
-            maxLines: 5,
-            onChang: (p0) {
-              subtitle = p0;
-            },
-          ),
-          SizedBox(height: 60),
-          EditNotesColorsList(note: widget.note),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 50),
+            CustomAppBar(
+              title: 'Edit Note',
+              icon: Icon(Icons.check),
+              onPressed: () {
+                widget.note.title = title ?? widget.note.title;
+                widget.note.subtitle = subtitle ?? widget.note.subtitle;
+                widget.note.save();
+                BlocProvider.of<NotesCubit>(context).fetchAllNotes();
+                showSnackBar(context, 'Edit Note Successful');
+                Navigator.pop(context);
+              },
+            ),
+            SizedBox(height: 50),
+            CustomTextFormField(
+              hintText: widget.note.title,
+              onChang: (p0) {
+                title = p0;
+              },
+            ),
+            SizedBox(height: 16),
+            CustomTextFormField(
+              hintText: widget.note.subtitle,
+              maxLines: 5,
+              onChang: (p0) {
+                subtitle = p0;
+              },
+            ),
+            SizedBox(height: 60),
+            EditNotesColorsList(note: widget.note),
+          ],
+        ),
       ),
     );
   }
